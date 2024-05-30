@@ -23,5 +23,6 @@ public:
 TEST_F(BaseballFixtrue, ThrowExceptionWhenInvalidCase) {
 	assertllegalArgument("12");
 	assertllegalArgument("12s");
+	assertllegalArgument("121");
 }
 
