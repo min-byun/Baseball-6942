@@ -15,10 +15,10 @@ public:
 	}
 	GuessResult guess(const string& guessNumber) {
 		assertIllegalArgument(guessNumber);
-		if (guessNumber == question) {
-			return { true,3,0 };
-		}
-		return { false,0,0 };
+		int strikes = checkStrikes(guessNumber);
+		bool solved = (strikes == 3)? true:false;
+		int balls = checkBalls(guessNumber);
+		return { solved,strikes,balls };
 	}
 private:
 	string question;
@@ -38,5 +38,25 @@ private:
 		if (isDuplicatedNumber(guessNumber)) {
 			throw invalid_argument("Must not have the same number");
 		}
+	}
+
+	int checkStrikes(const string& guessNumber) {
+		int strikes_num = 0;
+		for (int i=0;i<3;i++){
+			if (guessNumber[i] == question[i])
+				strikes_num++;
+		}
+		return strikes_num;
+	}
+	int checkBalls(const string& guessNumber) {
+		int balls_num = 0;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (i == j) continue;
+				if (guessNumber[i] == question[j])
+					balls_num++;
+			}
+		}
+		return balls_num;
 	}
 };

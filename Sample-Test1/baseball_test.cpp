@@ -26,10 +26,24 @@ TEST_F(BaseballFixtrue, ThrowExceptionWhenInvalidCase) {
 	assertllegalArgument("121");
 }
 
-TEST_F(BaseballFixtrue, ReturnSolvedResultIfMatchedNumber) {
+TEST_F(BaseballFixtrue, ReturnSolvedResultIfMatchedNumber3strikes) {
 	GuessResult result = game.guess("123");
 
 	EXPECT_TRUE(result.solved);
 	EXPECT_EQ(3, result.strikes);
 	EXPECT_EQ(0, result.balls);
+}
+TEST_F(BaseballFixtrue, ReturnSolvedResultIfMatchedNumber2strikes0ball) {
+	GuessResult result = game.guess("124");
+
+	EXPECT_FALSE(result.solved);
+	EXPECT_EQ(2, result.strikes);
+	EXPECT_EQ(0, result.balls);
+}
+TEST_F(BaseballFixtrue, ReturnSolvedResultIfMatchedNumber1strike2ball) {
+	GuessResult result = game.guess("132");
+
+	EXPECT_FALSE(result.solved);
+	EXPECT_EQ(1, result.strikes);
+	EXPECT_EQ(2, result.balls);
 }
